@@ -1,10 +1,9 @@
+require("dotenv").config();
 const express = require("express");
 const router = express.Router();
 const db = require("../database");
 const jwt = require("jsonwebtoken");
 const auth = require("../auth");
-
-console.log(db);
 
 router.get("/login", async function(req, res) {
     const [type, hash] =  req.headers.authorization ? req.headers.authorization.split(" ") : null;
@@ -22,12 +21,18 @@ router.get("/login", async function(req, res) {
         );
 
         if (result.rows.length > 0) {
-            return res.send("Logado");
+            const token = jwt.sign({ id: result.rows[0].id }, process.env.API_TOKEN);
+
+            return res.send([{
+                id: result.rows[0].id,
+                nome: result.rows[0].nome,
+                token
+            }]);
         } else {
             return res.status(401).send("Usuário ou senha incorreto(s)");
         }
     } catch (error) {
-        return res.status(500).send("Server error");
+        return res.status(500).send("Ocorreu um erro");
     }
 })
 
