@@ -6,8 +6,12 @@ const sessions = require("express-session");
 app.use(sessions({
     secret: process.env.SESSION_SECRET,
     resave: true,
-    saveUninitialized: true,
-    cookie: { maxAge: 30000 }
+    saveUninitialized: false,
+    cookie: { 
+        maxAge: 30000,
+        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+        secure: process.env.NODE_ENV === "production",
+    }
 }));
 
 app.use(require("cors")({origin: ["http://localhost:3000", "http://analytcoz.herokuapp.com", "https://analytcoz.herokuapp.com"], credentials: true}), express.json());
