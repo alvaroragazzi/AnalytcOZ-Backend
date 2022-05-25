@@ -1,11 +1,7 @@
-function auth(req, res, next) {
-    const auth = req.session.authenticated;
-   
-    if (!auth) {
+module.exports = function auth(req, res, next) {
+    if (!req.session.authenticated) {
         return res.sendStatus(403);
     }
 
     next();
-}
-
-module.exports = auth;
+};
