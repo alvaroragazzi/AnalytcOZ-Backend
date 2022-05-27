@@ -7,6 +7,8 @@ const ProdutoRoutes = require("./routes/produto");
 const ServicoRoutes = require("./routes/servico");
 const UsuarioRoutes = require("./routes/usuario");
 const VendaRoutes = require("./routes/venda");
+const ClienteRoutes = require("./routes/cliente");
+const CustoRoutes = require("./routes/custo");
 
 const checkAuth = require("./middlewares/checkAuth");
 
@@ -27,6 +29,8 @@ app.use(require("cors")({origin: ["http://localhost:3000", "http://analytcoz.her
 app.use("/produto", checkAuth, ProdutoRoutes);
 app.use("/servico", checkAuth, ServicoRoutes);
 app.use("/venda", checkAuth, VendaRoutes);
+app.use("/cliente", checkAuth, ClienteRoutes);
+app.use("/custo", checkAuth, CustoRoutes);
 app.use("/usuario", UsuarioRoutes);
 
 app.listen(process.env.PORT || 8080, () => console.log("Servidor inciado"));
