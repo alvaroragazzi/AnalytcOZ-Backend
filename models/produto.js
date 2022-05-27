@@ -1,16 +1,16 @@
 const db = require("../database");
 
 module.exports = class Produto {
-    static getAll(idUser) {
+    static getAll(usuario_criou) {
         const query = `SELECT * FROM analytcoz.produtos WHERE usuario_criou = $1`;
 
-        return db.query(query, [idUser]);
+        return db.query(query, [usuario_criou]);
     }
 
-    static get(id) {
-        const query = `SELECT * FROM analytcoz.produtos WHERE id = $1`;
+    static get(usuario_criou, id) {
+        const query = `SELECT * FROM analytcoz.produtos WHERE usuario_criou = $1 AND id = $2`;
 
-        return db.query(query, [id]);
+        return db.query(query, [usuario_criou, id]);
     }
 
     static insert(nome, valor, usuario_criou) {
