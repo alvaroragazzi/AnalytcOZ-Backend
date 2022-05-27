@@ -1,11 +1,23 @@
 const ServicoModel = require("../models/servico");
 
 exports.getAll = async function(req, res, next) {
-    
+    try {
+        const result = await ServicoModel.getAll(req.session.authenticated.id);
+
+        return res.send(result);
+    } catch {
+        return res.sendStatus(500);
+    }
 }
 
 exports.get = async function(req, res, next) {
+    try {
+        const result = await ServicoModel.get(req.session.authenticated.id, req.params.id);
 
+        return res.send(result);
+    } catch {
+        return res.sendStatus(500);
+    }
 }
 
 exports.insert = async function(req, res, next) {
