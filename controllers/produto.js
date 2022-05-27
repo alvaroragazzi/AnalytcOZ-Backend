@@ -1,11 +1,23 @@
 const ProdutoModel = require("../models/produto");
 
 exports.getAll = async function(req, res, next) {
-    
+    try {
+        const result = await ProdutoModel.getAll(req.session.authenticated.id);
+
+        return res.send(result);
+    } catch {
+        return res.sendStatus(500);
+    }
 }
 
 exports.get = async function(req, res, next) {
+    try {
+        const result = await ProdutoModel.get(req.session.authenticated.id, req.params.id);
 
+        return res.send(result);
+    } catch {
+        return res.sendStatus(500);
+    }
 }
 
 exports.insert = async function(req, res, next) {
@@ -15,7 +27,7 @@ exports.insert = async function(req, res, next) {
         const valor = info.valor;
         const usuario_criou = req.session.authenticated.id;
 
-        const response = await ProdutoModel.insert(nome, valor, usuario_criou);
+        await ProdutoModel.insert(nome, valor, usuario_criou);
 
         return res.sendStatus(201);
     } catch {
