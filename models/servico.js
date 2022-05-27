@@ -1,16 +1,17 @@
 const db = require("../database");
 
 module.exports = class Servico {
-    static getAll(idUser) {
+    static getAll(usuario_criou) {
         const query = `SELECT * FROM analytcoz.servicos WHERE usuario_criou = $1`;
 
-        return db.query(query, [idUser]);
+        return db.query(query, [usuario_criou]);
     }
 
-    static get(id) {
-        const query = `SELECT * FROM analytcoz.servicos WHERE id = $1`;
+    static get(usuario_criou, id) {
+        // verificando o ID do usuário logado para prevenir acesso de informações de outros usuários
+        const query = `SELECT * FROM analytcoz.servicos WHERE usuario_criou = $1 AND id = $2`;
 
-        return db.query(query, [id]);
+        return db.query(query, [usuario_criou, id]);
     }
 
     static insert(descricao, valor, tempo_gasto, usuario_criou) {
