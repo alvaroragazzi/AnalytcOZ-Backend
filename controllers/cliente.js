@@ -1,4 +1,4 @@
-const ClienteModel = require("../models/produto");
+const ClienteModel = require("../models/cliente");
 
 exports.getAll = async function(req, res, next) {
     try {
@@ -20,10 +20,24 @@ exports.get = async function(req, res, next) {
     }
 }
 
-exports.insert = async function(req, res, next) {
+exports.insert = async function(req, res) {
     try {
-        await ClienteModel.insert();
-    } catch {
+        const info = req.body;
+    
+        const nome = info.nome;
+        const cpfcnpj = info.cpfcnpj;
+        const email = info.email;
+        const cidade = info.cidade;
+        const bairro = info.bairro;
+        const logradouro = info.logradouro;
+        const cep = info.cep;
+        const usuario_criou = req.session.authenticated.id;
+
+        await ClienteModel.insert(nome, cpfcnpj, email, cidade, bairro, logradouro, cep, usuario_criou);
+
+        return res.sendStatus(201);
+    } catch(err) {
+        console.log(err);
         return res.sendStatus(500);
     }
 }
