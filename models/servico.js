@@ -8,7 +8,6 @@ module.exports = class Servico {
     }
 
     static get(usuario_criou, id) {
-        // verificando o ID do usuário logado para prevenir acesso de informações de outros usuários
         const query = `SELECT * FROM analytcoz.servicos WHERE usuario_criou = $1 AND id = $2`;
 
         return db.query(query, [usuario_criou, id]);

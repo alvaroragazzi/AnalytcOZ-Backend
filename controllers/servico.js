@@ -1,6 +1,6 @@
 const ServicoModel = require("../models/servico");
 
-exports.getAll = async function(req, res, next) {
+exports.getAll = async function(req, res) {
     try {
         const result = await ServicoModel.getAll(req.session.authenticated.id);
 
@@ -10,7 +10,7 @@ exports.getAll = async function(req, res, next) {
     }
 }
 
-exports.get = async function(req, res, next) {
+exports.get = async function(req, res) {
     try {
         const result = await ServicoModel.get(req.session.authenticated.id, req.params.id);
 
@@ -20,7 +20,7 @@ exports.get = async function(req, res, next) {
     }
 }
 
-exports.insert = async function(req, res, next) {
+exports.insert = async function(req, res) {
     try {
         const info = req.body;
         const descricao = info.descricao;
@@ -36,6 +36,6 @@ exports.insert = async function(req, res, next) {
     }
 }
 
-exports.update = async function(req, res, next) {
+exports.update = async function(req, res) {
     
 }

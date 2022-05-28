@@ -10,7 +10,21 @@ module.exports = class Venda {
     }
 
     static insert() {
-
+        const query = `
+        INSERT INTO analytcoz.vendas(
+            descricao,
+            valor,
+            tempo_gasto,
+            usuario_criou
+        ) VALUES(
+            $1,
+            $2,
+            $3,
+            $4
+        )
+        `
+        
+        return db.query(query, []);
     }
 
     static update() {

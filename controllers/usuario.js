@@ -1,7 +1,6 @@
 const UsuarioModel = require("../models/usuario");
-const checkAuth = require("../middlewares/checkAuth");
 
-exports.login = async function(req, res, next) {
+exports.login = async function(req, res) {
     try {
         if (req.session.authenticated)
             return res.sendStatus(403);
@@ -26,12 +25,17 @@ exports.login = async function(req, res, next) {
             return res.sendStatus(401);
         }
     } catch(err) {
-        console.log(err)
         return res.sendStatus(500);
     }
 }
 
-exports.logout = async function(req, res, next) {
+exports.checkAuth = async function(req, res) {
+    if (req.session.authenticated) return res.sendStatus(200);
+
+    return res.sendStatus(403);
+}
+
+exports.logout = async function(req, res) {
     req.session.destroy();
     return res.sendStatus(200);
 }

@@ -1,6 +1,6 @@
 const ProdutoModel = require("../models/produto");
 
-exports.getAll = async function(req, res, next) {
+exports.getAll = async function(req, res) {
     try {
         const result = await ProdutoModel.getAll(req.session.authenticated.id);
 
@@ -10,7 +10,7 @@ exports.getAll = async function(req, res, next) {
     }
 }
 
-exports.get = async function(req, res, next) {
+exports.get = async function(req, res) {
     try {
         const result = await ProdutoModel.get(req.session.authenticated.id, req.params.id);
 
@@ -20,7 +20,7 @@ exports.get = async function(req, res, next) {
     }
 }
 
-exports.insert = async function(req, res, next) {
+exports.insert = async function(req, res) {
     try {
         const info = req.body;
         const nome = info.nome;
@@ -35,6 +35,6 @@ exports.insert = async function(req, res, next) {
     }
 }
 
-exports.update = async function(req, res, next) {
+exports.update = async function(req, res) {
     
 }
