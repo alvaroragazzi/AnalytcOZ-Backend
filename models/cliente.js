@@ -13,20 +13,35 @@ module.exports = class Cliente {
         return db.query(query, [usuario_criou, id]);
     }
 
-    static insert(nome, valor, usuario_criou) {
+    static insert(nome, cpfcnpj, email, cidade, bairro, logradouro, cep, usuario_criou) {
+        nome = decodeURI(nome);
+        cidade = decodeURI(cidade);
+        bairro = decodeURI(bairro);
+        logradouro = decodeURI(logradouro);
+
         const query = `
-        INSERT INTO analytcoz.produtos(
+        INSERT INTO analytcoz.clientes(
             nome,
-            valor,
+            cpfcnpj,
+            email,
+            cidade,
+            bairro,
+            logradouro,
+            cep,
             usuario_criou
         ) VALUES(
             $1,
             $2,
-            $3
+            $3,
+            $4,
+            $5,
+            $6,
+            $7,
+            $8
         )
         `
 
-        return db.query(query, [nome, valor, usuario_criou]);
+        return db.query(query, [nome, cpfcnpj, email, cidade, bairro, logradouro, cep, usuario_criou]);
     }
 
     static update() {
