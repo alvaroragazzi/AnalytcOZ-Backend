@@ -2,9 +2,9 @@ const ClienteModel = require("../models/cliente");
 
 exports.getAll = async function(req, res, next) {
     try {
-        const result = ClienteModel.getAll(req.session.authenticated.id);
+        const result = await ClienteModel.getAll(req.session.authenticated.id);
 
-        return res.send(result);
+        return res.send(result.rows);
     } catch {
         return res.sendStatus(500);
     }
@@ -12,9 +12,9 @@ exports.getAll = async function(req, res, next) {
 
 exports.get = async function(req, res, next) {
     try {
-        const result = ClienteModel.getAll(req.session.authenticated.id, req.params.id);
+        const result = await ClienteModel.getAll(req.session.authenticated.id, req.params.id);
 
-        return res.send(result);
+        return res.send(result.rows);
     } catch {
         return res.sendStatus(500);
     }

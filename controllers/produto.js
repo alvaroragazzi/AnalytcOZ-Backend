@@ -4,7 +4,7 @@ exports.getAll = async function(req, res) {
     try {
         const result = await ProdutoModel.getAll(req.session.authenticated.id);
 
-        return res.send(result);
+        return res.send(result.rows);
     } catch {
         return res.sendStatus(500);
     }
@@ -14,7 +14,7 @@ exports.get = async function(req, res) {
     try {
         const result = await ProdutoModel.get(req.session.authenticated.id, req.params.id);
 
-        return res.send(result);
+        return res.send(result.rows);
     } catch {
         return res.sendStatus(500);
     }

@@ -3,7 +3,7 @@ const db = require("../database");
 module.exports = class Cliente {
     static getAll(usuario_criou) {
         const query = `SELECT * FROM analytcoz.clientes WHERE usuario_criou = $1`;
-
+        
         return db.query(query, [usuario_criou]);
     }
 
